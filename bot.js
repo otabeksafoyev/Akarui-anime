@@ -765,11 +765,8 @@ async function sendWithLoader(chat_id, callback) {
 
 
 
-// ======================
-// YANGI ADMINLARNI BOSHQARISH
-// ======================
 
-// Faqat mavjud adminlar yangi admin qo'sha oladi yoki o'chiradi
+
 bot.onText(/\/addadmin(?:\s+(.+))?/, async (msg, match) => {
   const chatId = msg.chat.id;
   const uid = msg.from.id;
@@ -789,7 +786,7 @@ bot.onText(/\/addadmin(?:\s+(.+))?/, async (msg, match) => {
   }
 
   if (is_admin(newAdminId)) {
-    return bot.sendMessage(chatId, `❌ ${newAdminId} allaqachon admin.");
+    return bot.sendMessage(chatId, `❌ ${newAdminId} allaqachon admin.`);
   }
 
   // Yangi adminni qo'shamiz
@@ -806,77 +803,6 @@ bot.onText(/\/addadmin(?:\s+(.+))?/, async (msg, match) => {
 
   console.log(`Admin qo'shildi: ${newAdminId} tomonidan ${uid}`);
 });
-
-// Adminni o'chirish
-bot.onText(/\/removeadmin(?:\s+(.+))?/, async (msg, match) => {
-  const chatId = msg.chat.id;
-  const uid = msg.from.id;
-
-  if (!is_admin(uid)) {
-    return bot.sendMessage(chatId, "❌ Sizda bu buyruqni ishlatish huquqi yo'q.");
-  }
-
-  const removeAdminIdStr = match[1]?.trim();
-  if (!removeAdminIdStr) {
-    return bot.sendMessage(chatId, "Foydalanish: /removeadmin <user_id>\nMasalan: /removeadmin 123456789");
-  }
-
-  const removeAdminId = parseInt(removeAdminIdStr);
-  if (isNaN(removeAdminId)) {
-    return bot.sendMessage(chatId, "❌ User ID raqam bo'lishi kerak.");
-  }
-
-  if (!is_admin(removeAdminId)) {
-    return bot.sendMessage(chatId, `❌ ${removeAdminId} adminlar ro'yxatida yo'q.`);
-  }
-
-  // O'zingizni o'chirib bo'lmaydi (xavfsizlik uchun)
-  if (removeAdminId === uid) {
-    return bot.sendMessage(chatId, "❌ O'zingizni adminlikdan chiqara olmaysiz.");
-  }
-
-  // Adminni o'chirish
-  const index = ADMIN_IDS.indexOf(removeAdminId);
-  if (index !== -1) {
-    ADMIN_IDS.splice(index, 1);
-  }
-
-  bot.sendMessage(chatId, `✅ ${removeAdminId} adminlikdan chiqarildi.`);
-
-  // Chiqarilgan shaxsga xabar (ixtiyoriy)
-  try {
-    await bot.sendMessage(removeAdminId, "Siz botda admin huquqlaridan mahrum qilindingiz.");
-  } catch (e) {
-    console.log(`Chiqarilgan admin (${removeAdminId}) ga xabar yuborib bo'lmadi:`, e.message);
-  }
-
-  console.log(`Admin chiqarildi: ${removeAdminId} tomonidan ${uid}`);
-});
-
-// Adminlar ro'yxatini yaxshilangan ko'rinishda chiqarish (allaqachon bor, lekin yangilaymiz)
-bot.onText(/\/adminlist/, (msg) => {
-  const chatId = msg.chat.id;
-  const uid = msg.from.id;
-
-  if (!is_admin(uid)) {
-    return bot.sendMessage(chatId, "❌ Faqat adminlar bu ro'yxatni ko'ra oladi.");
-  }
-
-  if (ADMIN_IDS.length === 0) {
-    return bot.sendMessage(chatId, "Hozircha hech qanday admin yo'q.");
-  }
-
-  let text = "👑 <b>Hozirgi adminlar ro'yxati:</b>\n\n";
-  ADMIN_IDS.forEach((id, index) => {
-    text += `${index + 1}. <code>${id}</code>\n`;
-  });
-
-  text += `\nJami: ${ADMIN_IDS.length} ta admin`;
-
-  bot.sendMessage(chatId, text, { parse_mode: "HTML" });
-});
-
-
 
 
 
