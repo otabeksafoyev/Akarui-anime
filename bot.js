@@ -18,7 +18,7 @@ const BOT_VERSION = "2.5.0";
 
 const ADMIN_CHAT_LINK = "https://t.me/safoyev9225";
 
-// Bot – polling dastlab o‘chirilgan
+// Bot – podsdfdfsfdlling dastlab o‘chirilgan
 const bot = new TelegramBot(TOKEN, { polling: false });
 let BOT_USERNAME = 'akarui_animebot';
 
