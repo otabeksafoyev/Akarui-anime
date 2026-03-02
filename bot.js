@@ -354,7 +354,7 @@ async function send_start_banner(chat_id) {
   try {
     const total_users = await users.countDocuments({});
     const top_anime = await serials.findOne({}, { sort: { views: -1 } }) || { title: "Hali anime yo‘q", views: 0 };
-    const banner_url = "https://i.postimg.cc/yYXCsTkw/photo-2026-01-05-15-32-43.jpg";
+    const banner_url = "https://i.postimg.cc/Ls93WRVD/photo-2026-02-28-18-28-39.jpg";
     const caption = (
       ". . ── •✧⛩✧• ── . .\n" +
       "• ❤️ Akarui Uz bilan hammasi yanada osonroq va qiziqarli, azizim! o((≧ω≦ ))o\n" +
