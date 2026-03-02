@@ -12,7 +12,7 @@ const MONGO_URL = process.env.MONGO_URL;
 const UPLOAD_CHANNEL = -1003712924274; 
 const SUB_CHANNEL = "akarui_anime";
 const NEWS_CHANNEL = "akarui_anime";
-const ADMIN_IDS = [8173188671, 8100975783, ];
+const ADMIN_IDS = [8173188671, 6634079618 ];
 const ADMIN_USERNAME = "safoyev9225";
 const BOT_VERSION = "2.5.0";
 
